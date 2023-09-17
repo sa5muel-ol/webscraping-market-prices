@@ -7,9 +7,11 @@ from webscraper import scrap_market_data
 
 st.write('Weekly Market Prices')
 
-# Load the existing dataset
-existingDataset = pd.read_csv("D:\\Web Scrapping\\Market_data.csv")
-data = pd.DataFrame()
+# Define the column headers
+columns = ["Commodity", "Price", "Units", "Date", "Market"]
+
+# Create an empty DataFrame with the specified columns
+data = pd.DataFrame(columns=columns)
 current_date = date.datetime.now()
 
 # Define the file path for the CSV file in the user's Downloads folder
@@ -36,7 +38,7 @@ with st.sidebar:
     st.write('Download Recent Price Information')
 
     if st.button('Refresh data'):
-        data = scrap_market_data(dataset=existingDataset, all_links=links)
+        data = scrap_market_data(dataset=data, all_links=links)
         st.write('Success')
 
     if not data.empty:
